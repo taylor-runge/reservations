@@ -32,6 +32,7 @@
                     <form method="POST" action="/admin/alerts/<%= alert.id %>/delete/" class="dcf-form delete-form delete-alert">
                         <button class="dcf-btn dcf-btn-secondary dcf-mt-1" type="submit">Delete</button>
                     </form>
+                    <a href="/admin/alerts/<%= alert.id %>/signups/" class="dcf-btn dcf-btn-primary dcf-mt-1">View Signups for this Alert</a>
                 </td>
             </tr>
         <% end %>

@@ -1,0 +1,21 @@
+<h1 class="dcf-txt-h4" id="signup-list-header">Signup List for <%= alert.name %></h1>
+
+<table class="dcf-w-100% dcf-table dcf-table-bordered">
+
+    <% if !alert_signups.empty? %>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+    <% else %>
+        <p>So far, no one has signed up for this alert.</p>
+    <% end %>
+    <tbody>
+        <% alert_signups.sort_by { |signup| User.find_by(:id => signup.user_id).full_name }.each do |signup| %>
+            <tr>
+                <td><%= User.find_by(:id => signup.user_id).full_name %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

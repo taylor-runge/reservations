@@ -169,6 +169,21 @@ post '/admin/events/:event_id/signup_list/?' do
 			end	
 		end
 
+		# checks first if the deletion checkbox was selected and deletes the signup record aswell as the key
+		params.each do |key, value|
+
+			if key.start_with?('deletion_') && value == 'on'
+
+				signup_id = key.split('deletion_')[1].to_i
+				signup_record = EventSignup.find_by(:id => signup_id)
+
+				unless signup_record == nil
+
+					signup_record.destroy
+				end
+			end
+		end
+
 		#  add new tool permissions for checked members in signup list
 		params.each do |key, value|
 			if key.start_with?('attendance_') && value == 'on'

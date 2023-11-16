@@ -9,9 +9,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Attended</th>
-                <% if event_type_id == 1 %>
                     <th>Delete Signup</th>
-                <% end %>
                 </tr>
             </thead>
         <% else %>
@@ -28,14 +26,12 @@
                             <label for="attendance-checkbox_<%= signup.id %>"></label>
                         </div>
                     </td>
-                    <% if event_type_id == 1 %>
-                        <td>
-                            <div class="dcf-input-checkbox">
-                                <input id="deletion-checkbox_<%= signup.id %>" type="checkbox" name="deletion_<%= signup.id %>"  >
-                                <label for="deletion-checkbox_<%= signup.id %>"></label>
-                            </div>
-                        </td>
-                    <% end %>
+                    <td>
+                        <div class="dcf-input-checkbox">
+                            <input id="deletion-checkbox_<%= signup.id %>" type="checkbox" name="deletion_<%= signup.id %>"  >
+                            <label for="deletion-checkbox_<%= signup.id %>"></label>
+                        </div>
+                    </td>
                 </tr>
             <% end %>
         </tbody>

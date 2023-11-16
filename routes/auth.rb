@@ -174,16 +174,21 @@ post '/check_in_login/?' do
 end
 
 get '/forgot_password_check_in/' do
-  erb :forgot_password, :layout => :fixed_no_toolbar
+
+  check_in = true
+
+  erb :forgot_password, :layout => :fixed_no_toolbar, :locals => {
+    :check_in => check_in
+  }
 end
 
 post '/forgot_password_check_in/' do
   user = User.find_by(:username => params[:username].trim)
   unless user.nil?
     user.send_reset_password_email
+    flash :success, 'Email sent', 'An email containing instructions to reset your password has been sent.'
   end
 
-  flash :success, 'Email sent', 'An email containing instructions to reset your password has been sent.'
   redirect '/check_in_login/'
 end
 
@@ -219,16 +224,21 @@ post '/login/?' do
 end
 
 get '/forgot_password/' do
-  erb :forgot_password, :layout => :fixed
+
+  check_in = false
+
+  erb :forgot_password, :layout => :fixed, :locals => {
+    :check_in => check_in
+  }
 end
 
 post '/forgot_password/' do
   user = User.find_by(:username => params[:username].trim)
   unless user.nil?
     user.send_reset_password_email
+    flash :success, 'Email sent', 'An email containing instructions to reset your password has been sent.'
   end
 
-  flash :success, 'Email sent', 'An email containing instructions to reset your password has been sent.'
   redirect '/login/'
 end
 

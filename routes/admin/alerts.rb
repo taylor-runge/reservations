@@ -108,3 +108,23 @@ post '/admin/alerts/:alert_id/edit/?' do
 	flash(:success, 'Alert Updated', "Your alert #{alert.name} has been updated.")
 	redirect '/admin/alerts/'
 end
+
+get '/admin/alerts/:alert_id/signups/?' do
+	require_login
+	@breadcrumbs << {:text => 'Admin Alerts', :href => '/admin/alerts/'} << {:text => 'Signups'}
+
+	alert = Alert.find_by(:id => params[:alert_id])
+
+	if alert.nil?
+		flash(:alert, 'Not Found', 'That alert does not exist.')
+		redirect '/admin/alerts/'
+	end
+
+	alert_signups = AlertSignup.where(:alert_id => alert).all
+
+	erb :'admin/alert_signup', :layout => :fixed, :locals => {
+		:alert => alert,
+		:alert_signups => alert_signups
+	}
+
+end
